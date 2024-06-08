@@ -4,7 +4,7 @@
 # JavaScript Apps Website
 
 ## Overview
-This project is a simple website that serves as a hub for various JavaScript applications. The homepage features a card-based design, with each card linking to a different JavaScript app subpage. Each card includes an image, a title, a description, and a button to navigate to the respective app.
+This project is a simple website that serves as a hub for various JavaScript applications. The homepage features a card-based design, with each card linking to a different JavaScript app subpage. 
 
 ## Features
 - **Responsive Design:** The layout adjusts for different screen sizes, ensuring usability on both desktop and mobile devices.
@@ -76,4 +76,3 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Contact
 For any questions or feedback, please contact [sbiswas001.tech@gmail.com].
-```
