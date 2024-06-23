@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Description of App 2',
             link: 'pages/app2.html'
         }
-        // Add more cards data as needed
     ];
 
     const cardsContainer = document.getElementById('cards-container');
