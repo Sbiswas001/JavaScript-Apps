@@ -36,6 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
       description: "Generates a random password",
       link: "pages/password-generator.html"
     },
+    {
+      imgSrc: "assets/images/weather-app/weathericon.png",
+      title: "Weather App",
+      description: "Shows weather details of a specified location.",
+      link: "pages/weather-app.html"
+    },
   ]
 
   const cardsContainer = document.getElementById("cards-container")
