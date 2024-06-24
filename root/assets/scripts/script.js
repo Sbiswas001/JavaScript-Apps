@@ -42,6 +42,12 @@ document.addEventListener("DOMContentLoaded", function () {
       description: "Shows weather details of a specified location.",
       link: "pages/weather-app.html"
     },
+    {
+      imgSrc: "assets/images/qrcode-generator/qrcodeapp.png",
+      title: "QR Code Generator",
+      description: "Generate QR code for any text or url.",
+      link: "pages/qrcode-generator.html"
+    },
   ]
 
   const cardsContainer = document.getElementById("cards-container")
