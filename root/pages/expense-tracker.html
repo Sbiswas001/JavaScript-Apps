@@ -1,147 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expense Tracker</title>
-    <link rel="stylesheet" href="../assets/css/expense-tracker.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../assets/css/expense-tracker.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1><i class="fas fa-wallet"></i> Expense Tracker</h1>
-            <p>Track your daily expenses and manage your budget</p>
-        </header>
+      <header>
+        <h1><i class="fas fa-wallet"></i> Expense Tracker</h1>
+        <p>Track your daily expenses and manage your budget</p>
+      </header>
 
-        <div class="dashboard">
-            <div class="summary-cards">
-                <div class="card total-expenses">
-                    <div class="card-header">
-                        <h3>Total Expenses</h3>
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="amount" id="total-amount">₹0.00</div>
-                </div>
-                
-                <div class="card monthly-expenses">
-                    <div class="card-header">
-                        <h3>This Month</h3>
-                        <i class="fas fa-calendar-month"></i>
-                    </div>
-                    <div class="amount" id="monthly-amount">₹0.00</div>
-                </div>
-                
-                <div class="card budget-card">
-                    <div class="card-header">
-                        <h3>Budget</h3>
-                        <i class="fas fa-target"></i>
-                    </div>
-                    <div class="amount" id="budget-amount">₹0.00</div>
-                </div>
+      <div class="dashboard">
+        <div class="summary-cards">
+          <div class="card total-expenses">
+            <div class="card-header">
+              <h3>Total Expenses</h3>
+              <i class="fas fa-chart-line"></i>
             </div>
+            <div class="amount" id="total-amount">₹0.00</div>
+          </div>
+
+          <div class="card monthly-expenses">
+            <div class="card-header">
+              <h3>This Month</h3>
+              <i class="fas fa-calendar-month"></i>
+            </div>
+            <div class="amount" id="monthly-amount">₹0.00</div>
+          </div>
+
+          <div class="card budget-card">
+            <div class="card-header">
+              <h3>Budget</h3>
+              <i class="fas fa-target"></i>
+            </div>
+            <div class="amount" id="budget-amount">₹0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="left-panel">
+          <div class="expense-form-container">
+            <h2>Add New Expense</h2>
+            <form id="expense-form">
+              <div class="form-group">
+                <label for="expense-description">Description</label>
+                <input
+                  type="text"
+                  id="expense-description"
+                  placeholder="Enter expense description"
+                  required
+                />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="expense-amount">Amount (₹)</label>
+                  <input
+                    type="number"
+                    id="expense-amount"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="expense-category">Category</label>
+                  <select id="expense-category" required>
+                    <option value="">Select category</option>
+                    <option value="food">🍔 Food</option>
+                    <option value="transport">🚗 Transport</option>
+                    <option value="entertainment">🎬 Entertainment</option>
+                    <option value="shopping">🛍️ Shopping</option>
+                    <option value="bills">📄 Bills</option>
+                    <option value="health">🏥 Health</option>
+                    <option value="education">📚 Education</option>
+                    <option value="other">📦 Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="expense-date">Date</label>
+                <input type="date" id="expense-date" required />
+              </div>
+
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-plus"></i> Add Expense
+              </button>
+            </form>
+          </div>
+
+          <div class="budget-container">
+            <h3>Set Monthly Budget</h3>
+            <div class="budget-input-group">
+              <input
+                type="number"
+                id="budget-input"
+                step="0.01"
+                min="0"
+                placeholder="Enter budget amount"
+              />
+              <button id="set-budget-btn" class="btn-secondary">
+                Set Budget
+              </button>
+            </div>
+            <div class="budget-progress" id="budget-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+              <span class="progress-text" id="progress-text">0% used</span>
+            </div>
+          </div>
         </div>
 
-        <div class="main-content">
-            <div class="left-panel">
-                <div class="expense-form-container">
-                    <h2>Add New Expense</h2>
-                    <form id="expense-form">
-                        <div class="form-group">
-                            <label for="expense-description">Description</label>
-                            <input type="text" id="expense-description" placeholder="Enter expense description" required>
-                        </div>
-                        
-                        <div class="form-row">
-                        <div class="form-group">
-                            <label for="expense-amount">Amount (₹)</label>
-                            <input type="number" id="expense-amount" step="0.01" min="0" placeholder="0.00" required>
-                        </div>                            <div class="form-group">
-                                <label for="expense-category">Category</label>
-                                <select id="expense-category" required>
-                                    <option value="">Select category</option>
-                                    <option value="food">🍔 Food</option>
-                                    <option value="transport">🚗 Transport</option>
-                                    <option value="entertainment">🎬 Entertainment</option>
-                                    <option value="shopping">🛍️ Shopping</option>
-                                    <option value="bills">📄 Bills</option>
-                                    <option value="health">🏥 Health</option>
-                                    <option value="education">📚 Education</option>
-                                    <option value="other">📦 Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="expense-date">Date</label>
-                            <input type="date" id="expense-date" required>
-                        </div>
-                        
-                        <button type="submit" class="btn-primary">
-                            <i class="fas fa-plus"></i> Add Expense
-                        </button>
-                    </form>
-                </div>
+        <div class="right-panel">
+          <div class="filters-container">
+            <h3>Filter Expenses</h3>
+            <div class="filters">
+              <select id="category-filter">
+                <option value="">All Categories</option>
+                <option value="food">🍔 Food</option>
+                <option value="transport">🚗 Transport</option>
+                <option value="entertainment">🎬 Entertainment</option>
+                <option value="shopping">🛍️ Shopping</option>
+                <option value="bills">📄 Bills</option>
+                <option value="health">🏥 Health</option>
+                <option value="education">📚 Education</option>
+                <option value="other">📦 Other</option>
+              </select>
 
-                <div class="budget-container">
-                    <h3>Set Monthly Budget</h3>
-                    <div class="budget-input-group">
-                        <input type="number" id="budget-input" step="0.01" min="0" placeholder="Enter budget amount">
-                        <button id="set-budget-btn" class="btn-secondary">Set Budget</button>
-                    </div>
-                    <div class="budget-progress" id="budget-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress-fill"></div>
-                        </div>
-                        <span class="progress-text" id="progress-text">0% used</span>
-                    </div>
-                </div>
+              <input type="month" id="month-filter" />
+
+              <button id="clear-filters" class="btn-clear">
+                Clear Filters
+              </button>
+            </div>
+          </div>
+
+          <div class="expenses-list-container">
+            <div class="expenses-header">
+              <h3>Recent Expenses</h3>
+              <button id="clear-all-btn" class="btn-danger">Clear All</button>
             </div>
 
-            <div class="right-panel">
-                <div class="filters-container">
-                    <h3>Filter Expenses</h3>
-                    <div class="filters">
-                        <select id="category-filter">
-                            <option value="">All Categories</option>
-                            <option value="food">🍔 Food</option>
-                            <option value="transport">🚗 Transport</option>
-                            <option value="entertainment">🎬 Entertainment</option>
-                            <option value="shopping">🛍️ Shopping</option>
-                            <option value="bills">📄 Bills</option>
-                            <option value="health">🏥 Health</option>
-                            <option value="education">📚 Education</option>
-                            <option value="other">📦 Other</option>
-                        </select>
-                        
-                        <input type="month" id="month-filter" />
-                        
-                        <button id="clear-filters" class="btn-clear">Clear Filters</button>
-                    </div>
-                </div>
-
-                <div class="expenses-list-container">
-                    <div class="expenses-header">
-                        <h3>Recent Expenses</h3>
-                        <button id="clear-all-btn" class="btn-danger">Clear All</button>
-                    </div>
-                    
-                    <div class="expenses-list" id="expenses-list">
-                        <div class="no-expenses">
-                            <i class="fas fa-receipt"></i>
-                            <p>No expenses added yet</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="expenses-list" id="expenses-list">
+              <div class="no-expenses">
+                <i class="fas fa-receipt"></i>
+                <p>No expenses added yet</p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
 
-        <div class="chart-container">
-            <h3>Spending by Category</h3>
-            <canvas id="expense-chart" width="400" height="200"></canvas>
-        </div>
+      <div class="chart-container">
+        <h3>Spending by Category</h3>
+        <canvas id="expense-chart" width="400" height="200"></canvas>
+      </div>
     </div>
 
     <script src="../assets/scripts/expense-tracker.js"></script>
-</body>
+  </body>
 </html>
