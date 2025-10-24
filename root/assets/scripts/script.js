@@ -48,6 +48,12 @@ document.addEventListener("DOMContentLoaded", function () {
       description: "Generate QR code for any text or url.",
       link: "pages/qrcode-generator.html"
     },
+    {
+      imgSrc: "assets/images/expense-tracker/expense-icon.html",
+      title: "Expense Tracker",
+      description: "Track your daily expenses and manage your budget effectively.",
+      link: "pages/expense-tracker.html"
+    },
   ]
 
   const cardsContainer = document.getElementById("cards-container")
