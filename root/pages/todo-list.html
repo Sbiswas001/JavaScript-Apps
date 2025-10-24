@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>ToDo List</title>
+		<link rel="stylesheet" href="../assets/css/todo-list.css" />
+	</head>
+	<body>
+		<main class="todo-app">
+			<header class="todo-header">
+				<h1>ToDo List</h1>
+				<p class="subtitle">Simple, local, and fast — built with plain JavaScript</p>
+			</header>
+
+			<section class="todo-input-wrap">
+				<form id="todo-form" class="todo-form" autocomplete="off">
+					<input id="todo-input" type="text" name="todo" placeholder="Add a new task..." />
+					<button id="add-btn" type="submit">Add</button>
+				</form>
+			</section>
+
+			<section class="todo-controls">
+				<div class="filters">
+					<button data-filter="all" class="filter active">All</button>
+					<button data-filter="active" class="filter">Active</button>
+					<button data-filter="completed" class="filter">Completed</button>
+				</div>
+				<div class="actions">
+					<button id="clear-completed">Clear completed</button>
+				</div>
+			</section>
+
+			<section class="todo-list-wrap">
+				<ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+			</section>
+
+			<footer class="todo-footer">
+				<span id="items-left">0</span> items left
+			</footer>
+		</main>
+
+		<script src="../assets/scripts/todo-list.js"></script>
+	</body>
+</html>

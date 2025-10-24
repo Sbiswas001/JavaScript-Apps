@@ -1,0 +1,39 @@
+:root{
+	--bg: #f5f7fb;
+	--card: #fff;
+	--accent: #5c6ac4;
+	--muted: #6b7280;
+	--success: #10b981;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);margin:0;color:#0f172a}
+.todo-app{max-width:720px;margin:48px auto;padding:20px}
+.todo-header h1{margin:0 0 4px;font-size:28px}
+.subtitle{margin:0;color:var(--muted);font-size:13px}
+.todo-input-wrap{margin-top:18px}
+.todo-form{display:flex;gap:8px}
+.todo-form input{flex:1;padding:12px 14px;border:1px solid #e6e9f0;border-radius:8px;font-size:15px}
+.todo-form button{background:var(--accent);color:#fff;border:0;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer}
+.todo-controls{display:flex;justify-content:space-between;align-items:center;margin:14px 0}
+.filters{display:flex;gap:8px}
+.filter{background:transparent;border:1px solid transparent;padding:6px 10px;border-radius:6px;cursor:pointer;color:var(--muted)}
+.filter.active{background:var(--card);border-color:#e2e8f0;color:var(--accent)}
+.actions button{background:transparent;border:0;color:var(--muted);cursor:pointer}
+.todo-list-wrap{background:transparent}
+.todo-list{list-style:none;margin:0;padding:0;border-radius:8px}
+.todo-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card);border:1px solid #eef2ff;margin-bottom:8px;border-radius:8px}
+.todo-item .left{display:flex;align-items:center;gap:10px;flex:1}
+.todo-item input[type="checkbox"]{width:18px;height:18px}
+.task-text{font-size:15px}
+.task-text.completed{text-decoration:line-through;color:var(--muted)}
+.todo-item .actions{display:flex;gap:8px}
+.todo-item button{background:transparent;border:0;color:var(--muted);cursor:pointer}
+.todo-footer{margin-top:14px;color:var(--muted);font-size:14px}
+
+@media (max-width:520px){.todo-app{padding:12px;margin:20px}}
+
+/* small utility for editing */
+.edit-input{width:100%;padding:8px;border-radius:6px;border:1px solid #e6e9f0}
+
+/* focus styles */
+input:focus,button:focus{outline:2px solid rgba(92,106,196,.12);outline-offset:2px}
