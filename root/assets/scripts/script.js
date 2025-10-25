@@ -56,6 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
         "Track your daily expenses and manage your budget effectively.",
       link: "pages/expense-tracker.html",
     },
+    {
+      imgSrc: "assets/images/word-counter/wordcounter.svg",
+      title: "Word Counter",
+      description: "Count words, characters, and sentences in your text instantly.",
+      link: "pages/word-counter.html",
+    },
   ];
 
   const cardsContainer = document.getElementById("cards-container");
