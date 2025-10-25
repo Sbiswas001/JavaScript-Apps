@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        .student-list {
+            margin-top: 20px;
+        }
+        .student-item {
+            background: #e0f7fa;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎓 Student Info Manager</h1>
+
+    <div>
+        <input type="text" id="name" placeholder="Enter Name">
+        <input type="text" id="department" placeholder="Enter Department">
+        <input type="text" id="roll" placeholder="Enter Roll No">
+        <button onclick="addStudent()">Add Student</button>
+    </div>
+
+    <div class="student-list" id="studentList">
+        <h2>Student List</h2>
+    </div>
+
+    <script>
+        let students = [];
+
+        function addStudent() {
+            const name = document.getElementById('name').value.trim();
+            const department = document.getElementById('department').value.trim();
+            const roll = document.getElementById('roll').value.trim();
+
+            if (name === "" || department === "" || roll === "") {
+                alert("⚠️ Please fill all fields!");
+                return;
+            }
+
+            const student = { name, department, roll };
+            students.push(student);
+            displayStudents();
+
+            // Clear input fields
+            document.getElementById('name').value = '';
+            document.getElementById('department').value = '';
+            document.getElementById('roll').value = '';
+        }
+
+        function displayStudents() {
+            const studentList = document.getElementById('studentList');
+            studentList.innerHTML = "<h2>Student List</h2>"; // Reset list
+
+            students.forEach((student, index) => {
+                const div = document.createElement('div');
+                div.className = 'student-item';
+                div.innerHTML = `
+                    <strong>${index + 1}. ${student.name}</strong><br>
+                    Department: ${student.department}<br>
+                    Roll No: ${student.roll}
+                `;
+                studentList.appendChild(div);
+            });
+        }
+    </script>
+
+</body>
+</html>
