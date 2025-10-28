@@ -1,5 +1,6 @@
 function checkStrength() {
-    const password = document.getElementById('passwordInput').value;
+    const passwordInput = document.getElementById('passwordInput'); 
+    const password = passwordInput.value; 
     const strengthBar = document.getElementById('strength-bar');
     const strengthText = document.getElementById('strength-text');
 
@@ -31,22 +32,26 @@ function checkStrength() {
     if (password.length === 0) {
         strengthBar.className = '';
         strengthText.className = '';
+        passwordInput.className = ''; 
         strengthText.textContent = 'weak'; // Reset to default
         strengthBar.style.width = '0%';
     } else if (score <= 2) {
         // Weak
         strengthBar.className = 'weak';
         strengthText.className = 'weak';
+        passwordInput.className = 'weak'; 
         strengthText.textContent = 'weak';
     } else if (score <= 4) {
         // Medium
         strengthBar.className = 'medium';
         strengthText.className = 'medium';
+        passwordInput.className = 'medium'; 
         strengthText.textContent = 'medium';
     } else {
         // Strong
         strengthBar.className = 'strong';
         strengthText.className = 'strong';
+        passwordInput.className = 'strong'; 
         strengthText.textContent = 'strong';
     }
 }
