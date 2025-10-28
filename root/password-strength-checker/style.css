@@ -30,9 +30,10 @@ h1 {
     width: calc(100% - 20px); /* Adjust for padding */
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 4px;
     margin-bottom: 15px;
+    transition: border-color 0.3s;
 }
 
 #strength-bar-container {
@@ -82,4 +83,14 @@ h1 {
 #message {
     font-size: 0.9rem;
     color: #555;
+}
+
+#passwordInput.weak {
+    border-color: #e74c3c; 
+}
+#passwordInput.medium {
+    border-color: #f39c12; 
+}
+#passwordInput.strong {
+    border-color: #2ecc71; 
 }
