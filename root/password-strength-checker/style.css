@@ -94,3 +94,8 @@ h1 {
 #passwordInput.strong {
     border-color: #2ecc71; 
 }
+#passwordInput:focus.weak,
+#passwordInput:focus.medium,
+#passwordInput:focus.strong {
+    outline: none;
+}
