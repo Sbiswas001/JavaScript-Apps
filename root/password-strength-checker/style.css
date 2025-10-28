@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    width: 100%;
+}
+
+#passwordInput {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+#strength-bar-container {
+    width: 100%;
+    height: 10px;
+    background: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#strength-bar {
+    height: 100%;
+    width: 0; /* Default width */
+    transition: width 0.3s, background-color 0.3s;
+}
+
+/* --- Strength Colors --- */
+
+/* Weak */
+#strength-bar.weak {
+    width: 33%;
+    background: #e74c3c; /* Red */
+}
+#strength-text.weak {
+    color: #e74c3c;
+}
+
+/* Medium */
+#strength-bar.medium {
+    width: 66%;
+    background: #f39c12; /* Orange */
+}
+#strength-text.medium {
+    color: #f39c12;
+}
+
+/* Strong */
+#strength-bar.strong {
+    width: 100%;
+    background: #2ecc71; /* Green */
+}
+#strength-text.strong {
+    color: #2ecc71;
+}
+
+#message {
+    font-size: 0.9rem;
+    color: #555;
+}
