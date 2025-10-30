@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Stopwatch</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.2) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(10px, -10px) scale(1.05); }
+            50% { transform: translate(-10px, 10px) scale(0.95); }
+            75% { transform: translate(-5px, -15px) scale(1.02); }
+        }
+
+        .container {
+            background: rgba(17, 24, 39, 0.4);
+            backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 32px;
+            padding: 50px 48px;
+            box-shadow: 
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                inset 0 0 100px rgba(255, 255, 255, 0.02);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2em;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            font-size: 0.938em;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* Circular Display with Glow */
+        .display-wrapper {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            margin: 0 auto 48px;
+        }
+
+        .circle-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+            filter: blur(40px);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .display-container {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 50%;
+            box-shadow: 
+                -10px -10px 30px rgba(255, 255, 255, 0.05),
+                10px 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .display-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(139, 92, 246, 0.1) 90deg,
+                transparent 180deg,
+                rgba(99, 102, 241, 0.1) 270deg,
+                transparent 360deg
+            );
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .display-inner {
+            position: relative;
+            z-index: 2;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 
+                inset -5px -5px 15px rgba(255, 255, 255, 0.05),
+                inset 5px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #display {
+            text-align: center;
+        }
+
+        .time {
+            font-size: 3.5em;
+            font-weight: 300;
+            color: #ffffff;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            letter-spacing: 0.02em;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .milliseconds {
+            color: #a78bfa;
+            font-size: 0.5em;
+            display: block;
+            margin-top: 8px;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(167, 139, 250, 0.6);
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(107, 114, 128, 0.3);
+            color: #9ca3af;
+            border: 1px solid rgba(107, 114, 128, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .status-indicator.running {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .status-indicator.paused {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        button {
+            padding: 16px 36px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.875em;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        #startBtn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #startBtn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.5);
+            transform: translateY(-2px);
+        }
+
+        #startBtn:active {
+            transform: translateY(0);
+        }
+
+        #pauseBtn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #pauseBtn:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            box-shadow: 0 12px 32px rgba(245, 158, 11, 0.5);
+            transform: translateY(-2px);
+        }
+
+        #resetBtn {
+            background: rgba(30, 41, 59, 0.8);
+            color: #cbd5e1;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        #resetBtn:hover {
+            background: rgba(51, 65, 85, 1);
+            color: #ffffff;
+            border-color: rgba(148, 163, 184, 0.3);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .lap-controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        #lapBtn {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #lapBtn:hover {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            box-shadow: 0 12px 32px rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        #clearLapsBtn {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        #clearLapsBtn:hover {
+            background: rgba(239, 68, 68, 0.25);
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .laps-container {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 20px;
+            padding: 6px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 
+                inset 0 2px 8px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(139, 92, 246, 0.1);
+            max-height: 320px;
+            overflow: hidden;
+        }
+
+        .laps-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 24px;
+            color: #a78bfa;
+            font-size: 0.813em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .laps {
+            max-height: 256px;
+            overflow-y: auto;
+            padding: 12px;
+        }
+
+        .laps::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .laps::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 10px;
+        }
+
+        .laps::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.4);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .laps::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.6);
+            background-clip: padding-box;
+        }
+
+        .lap-item {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.6));
+            padding: 18px 24px;
+            margin-bottom: 10px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lap-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(180deg, #8b5cf6, #7c3aed);
+            border-radius: 14px 0 0 14px;
+        }
+
+        .lap-item:hover {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+        }
+
+        .lap-number {
+            color: #a78bfa;
+            font-weight: 700;
+            font-size: 0.938em;
+            letter-spacing: 0.5px;
+        }
+
+        .lap-time {
+            color: #f9fafb;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            font-size: 1.063em;
+            font-weight: 500;
+        }
+
+        .lap-time .ms {
+            color: #8b5cf6;
+            font-size: 0.85em;
+            margin-left: 2px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: #6b7280;
+            font-size: 0.938em;
+            font-style: italic;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 36px 28px;
+            }
+
+            .display-wrapper {
+                width: 280px;
+                height: 280px;
+            }
+
+            .circle-glow {
+                width: 300px;
+                height: 300px;
+            }
+
+            .display-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .display-inner {
+                width: 250px;
+                height: 250px;
+            }
+
+            .time {
+                font-size: 2.5em;
+            }
+
+            button {
+                padding: 14px 28px;
+                font-size: 0.813em;
+            }
+
+            .controls, .lap-controls {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status-indicator" id="statusIndicator">Ready</div>
+        
+        <div class="header">
+            <h1>⚡ ULTIMATE STOPWATCH</h1>
+            <div class="subtitle">Precision Timing Redefined</div>
+        </div>
+        
+        <div class="display-wrapper">
+            <div class="circle-glow"></div>
+            <div class="display-container">
+                <div class="display-inner">
+                    <div id="display">
+                        <div class="time">00:00:00</div>
+                        <div class="milliseconds">000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="startBtn">Start</button>
+            <button id="pauseBtn" disabled>Pause</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+
+        <div class="lap-controls">
+            <button id="lapBtn" disabled>Add Lap</button>
+            <button id="clearLapsBtn" disabled>Clear All</button>
+        </div>
+
+        <div class="laps-container">
+            <div class="laps-header">
+                <span>Lap</span>
+                <span>Time</span>
+            </div>
+            <div class="laps" id="laps">
+                <div class="empty-state">No laps recorded yet</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval;
+        let isRunning = false;
+        let lapCounter = 1;
+
+        const displayTime = document.querySelector('.time');
+        const displayMs = document.querySelector('.milliseconds');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const lapBtn = document.getElementById('lapBtn');
+        const clearLapsBtn = document.getElementById('clearLapsBtn');
+        const lapsContainer = document.getElementById('laps');
+        const statusIndicator = document.getElementById('statusIndicator');
+
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const milliseconds = ms % 1000;
+
+            return {
+                time: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
+                ms: milliseconds.toString().padStart(3, '0')
+            };
+        }
+
+        function updateDisplay() {
+            const currentTime = Date.now();
+            elapsedTime = currentTime - startTime;
+            const formatted = formatTime(elapsedTime);
+            displayTime.textContent = formatted.time;
+            displayMs.textContent = formatted.ms;
+        }
+
+        function updateStatus(status) {
+            statusIndicator.textContent = status;
+            statusIndicator.className = 'status-indicator';
+            if (status === 'Running') {
+                statusIndicator.classList.add('running');
+            } else if (status === 'Paused') {
+                statusIndicator.classList.add('paused');
+            }
+        }
+
+        function start() {
+            if (!isRunning) {
+                startTime = Date.now() - elapsedTime;
+                timerInterval = setInterval(updateDisplay, 1);
+                isRunning = true;
+                
+                startBtn.disabled = true;
+                pauseBtn.disabled = false;
+                lapBtn.disabled = false;
+                updateStatus('Running');
+            }
+        }
+
+        function pause() {
+            if (isRunning) {
+                clearInterval(timerInterval);
+                isRunning = false;
+                
+                startBtn.disabled = false;
+                pauseBtn.disabled = true;
+                startBtn.textContent = 'Resume';
+                updateStatus('Paused');
+            }
+        }
+
+        function reset() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            startTime = 0;
+            elapsedTime = 0;
+            displayTime.textContent = '00:00:00';
+            displayMs.textContent = '000';
+            
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            lapBtn.disabled = true;
+            startBtn.textContent = 'Start';
+            updateStatus('Ready');
+        }
+
+        function addLap() {
+            if (isRunning) {
+                const emptyState = lapsContainer.querySelector('.empty-state');
+                if (emptyState) {
+                    emptyState.remove();
+                }
+
+                const formatted = formatTime(elapsedTime);
+                const lapItem = document.createElement('div');
+                lapItem.className = 'lap-item';
+                lapItem.innerHTML = `
+                    <span class="lap-number">LAP ${lapCounter}</span>
+                    <span class="lap-time">${formatted.time}<span class="ms">.${formatted.ms}</span></span>
+                `;
+                lapsContainer.insertBefore(lapItem, lapsContainer.firstChild);
+                lapCounter++;
+                clearLapsBtn.disabled = false;
+            }
+        }
+
+        function clearLaps() {
+            lapsContainer.innerHTML = '<div class="empty-state">No laps recorded yet</div>';
+            lapCounter = 1;
+            clearLapsBtn.disabled = true;
+        }
+
+        startBtn.addEventListener('click', start);
+        pauseBtn.addEventListener('click', pause);
+        resetBtn.addEventListener('click', reset);
+        lapBtn.addEventListener('click', addLap);
+        clearLapsBtn.addEventListener('click', clearLaps);
+    </script>
+</body>
+</html>
