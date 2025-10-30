@@ -1,0 +1,209 @@
+.history-btn, .theme-btn {
+  position: fixed;
+  top: 24px;
+  background: #eee;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  z-index: 200;
+  padding: 0.48rem 1.15rem;
+}
+.history-btn { right: 120px; }
+.theme-btn { right: 32px; }
+.history-btn:hover, .theme-btn:hover {
+  background: #4ca2cd;
+  color: #fff;
+}
+
+body {
+  background: linear-gradient(135deg, #67b26f, #4ca2cd);
+  height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background 0.4s;
+}
+body.dark {
+  background: linear-gradient(135deg, #222, #444);
+  color: #ececec;
+}
+.center-outer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container.main-content {
+  min-width: 340px;
+  max-width: 90vw;
+  background: #fff;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
+  border-radius: 20px;
+  padding: 2.3rem 2rem 2.9rem 2rem;
+  text-align: center;
+  position: relative;
+  transition: background 0.4s, color 0.4s;
+}
+body.dark .container.main-content {
+  background: #23272f;
+  color: #ececec;
+}
+.container.main-content h1 {
+  margin-bottom: 2rem;
+}
+#quote-box {
+  margin: 0 auto;
+}
+.quote-item {
+  background: #f6f6f6;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+  position: relative;
+  min-height: 80px;
+  transition: background 0.3s, color 0.3s, opacity 0.4s;
+}
+body.dark .quote-item {
+  background: #2c323f;
+  color: #fff;
+}
+.quote-text {
+  font-size: 1.29rem;
+}
+.quote-author {
+  margin-top: 0.47rem;
+  color: #777;
+  font-size: 1.03rem;
+}
+body.dark .quote-author {
+  color: #b2bec3;
+}
+.action-row {
+  display: flex;
+  gap: 1.1rem;
+  justify-content: center;
+  margin-top: 1.1rem;
+}
+#new-quote {
+  font-size: 1rem;
+  color: #fff;
+  background: #67b26f;
+  padding: 0.63rem 2.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#new-quote:hover {
+  background: #4ca2cd;
+}
+#copy-quote {
+  font-size: 1rem;
+  color: #fff;
+  background: #3091e4;
+  padding: 0.63rem 2.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#copy-quote.copied {
+  background: #4caf50;
+  animation: blinkCopied 1s;
+}
+@keyframes blinkCopied {
+  0% {background: #3091e4;}
+  60% {background: #4caf50;}
+  100% {background: #3091e4;}
+}
+#copy-quote:hover {
+  background: #186fc7;
+}
+#screenshot-quote {
+  font-size: 1rem;
+  color: #fff;
+  background: #e48430;
+  padding: 0.63rem 2.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#screenshot-quote:hover {
+  background: #ffb03a;
+  color: #23272f;
+}
+#toggle-author {
+  font-size: 1rem;
+  color: #fff;
+  background: #9b59b6;
+  padding: 0.63rem 2.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#toggle-author.author-hidden {
+  background: #bdc3c7;
+  color: #666;
+}
+#toggle-author:hover {
+  background: #8e44ad;
+}
+.sidebar {
+  width: 340px;
+  max-width: 95vw;
+  background: #f2f6fd;
+  box-shadow: 2px 0 18px 0 rgba(50,70,135,0.10);
+  border-right: 1px solid #dde1e7;
+  padding: 1.3rem 1rem 1rem 1.5rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 300;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s;
+}
+body.dark .sidebar {
+  background: #181e29;
+  color: #fff;
+  border-right: 1px solid #374151;
+}
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+#close-history {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+#close-history:hover { color: #d12b5b; }
+#history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+.history-item {
+  padding: 0.38rem 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+  color: #333;
+  word-break: break-word;
+  background: none;
+}
+body.dark .history-item {
+  color: #ececec;
+  border-bottom: 1px solid #374151;
+}
