@@ -66,14 +66,3 @@ digital-clock/
 * Add **current date & weekday display**
 * Add **theme toggle (Dark/Light Mode)**
 * Option to choose different **time zones**
-
----
-
-### 👨‍💻 **Author**
-
-**[Your Name]**
-📧 [yourname@example.com](mailto:yourname@example.com)
-🔗 [GitHub Profile](https://github.com/yourusername)
-
----
-
