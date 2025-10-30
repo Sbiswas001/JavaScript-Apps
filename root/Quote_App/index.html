@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Generator App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="show-history" class="history-btn">History</button>
+  <button id="theme-toggle" class="theme-btn">Theme</button>
+  <div class="app-layout">
+    <div id="history-sidebar" class="sidebar" style="display: none;">
+      <div class="sidebar-header">
+        <h2>History</h2>
+        <button id="close-history">&times;</button>
+      </div>
+      <ul id="history-list"></ul>
+    </div>
+    <div class="center-outer">
+      <div class="container main-content">
+        <h1>Quote Generator</h1>
+        <div id="quote-box">
+          <div class="quote-item" id="single-quote-item">
+            <div class="quote-text" id="quote">Loading...</div>
+            <div class="quote-author" id="author"></div>
+          </div>
+          <div class="action-row">
+            <button id="new-quote">New Quote</button>
+            <button id="copy-quote">Copy</button>
+            <button id="screenshot-quote">Screenshot</button>
+            <button id="toggle-author">Hide Author</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
