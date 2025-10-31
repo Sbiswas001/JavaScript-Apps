@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Quiz App</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .quiz-container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .option {
+      margin: 10px 0;
+      padding: 10px;
+      background: #e5e7eb;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .option:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    #next-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #result {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2 id="question">Loading question...</h2>
+    <div id="options"></div>
+    <button id="next-btn" onclick="nextQuestion()">Next</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What does HTML stand for?",
+        options: ["Hyper Text Makeup Language", "Hyper Text Markup Language", "High Text Machine Language", "None of the above"],
+        answer: 1
+      },
+      {
+        question: "Which language is used for styling web pages?",
+        options: ["HTML", "CSS", "Python", "C++"],
+        answer: 1
+      },
+      {
+        question: "Inside which HTML element do we put JavaScript?",
+        options: ["<js>", "<javascript>", "<script>", "<code>"],
+        answer: 2
+      },
+      {
+        question: "What does CSS stand for?",
+        options: ["Creative Style Sheet", "Cascading Style Sheets", "Computer Style Sheet", "Colorful Style Sheet"],
+        answer: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const resultEl = document.getElementById("result");
+    const nextBtn = document.getElementById("next-btn");
+
+    function loadQuestion() {
+      const current = quizData[currentQuestion];
+      questionEl.innerText = current.question;
+      optionsEl.innerHTML = "";
+
+      current.options.forEach((option, index) => {
+        const div = document.createElement("div");
+        div.classList.add("option");
+        div.innerText = option;
+        div.onclick = () => selectAnswer(index);
+        optionsEl.appendChild(div);
+      });
+
+      resultEl.innerText = "";
+    }
+
+    function selectAnswer(selectedIndex) {
+      const correctIndex = quizData[currentQuestion].answer;
+      const options = document.querySelectorAll(".option");
+
+      options.forEach((opt, i) => {
+        if (i === correctIndex) opt.style.background = "#16a34a"; // Green
+        else if (i === selectedIndex) opt.style.background = "#dc2626"; // Red
+        opt.style.color = "white";
+        opt.style.pointerEvents = "none";
+      });
+
+      if (selectedIndex === correctIndex) score++;
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      questionEl.innerText = "Quiz Completed! 🎉";
+      optionsEl.innerHTML = "";
+      nextBtn.style.display = "none";
+      resultEl.innerText = `Your Score: ${score} / ${quizData.length}`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
