@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Popup App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container" aria-live="polite">
+      <h1>Popup App</h1>
+      <p>Demo of a modal popup and toast notifications.</p>
+      <div class="settings">
+        <div class="theme-toggle">
+          <button id="theme-toggle" class="btn" aria-label="Toggle theme">Toggle Theme</button>
+          <span class="hint">(Shortcut: D)</span>
+        </div>
+        <div class="toast-settings">
+          <label>
+            Type
+            <select id="toast-type">
+              <option value="success" selected>Success</option>
+              <option value="info">Info</option>
+              <option value="warning">Warning</option>
+              <option value="error">Error</option>
+            </select>
+          </label>
+          <label>
+            Position
+            <select id="toast-position">
+              <option value="bottom-right" selected>Bottom Right</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="top-right">Top Right</option>
+              <option value="top-left">Top Left</option>
+            </select>
+          </label>
+          <label>
+            Duration (ms)
+            <input id="toast-duration" type="number" min="1000" step="500" value="3000" />
+          </label>
+          <label class="checkbox">
+            <input id="toast-progress" type="checkbox" checked /> Show progress
+          </label>
+          <label class="checkbox">
+            <input id="toast-pause" type="checkbox" checked /> Pause on hover
+          </label>
+        </div>
+      </div>
+      <div class="button-row">
+        <button id="open-modal" class="btn primary">Open Modal</button>
+        <button id="show-toast" class="btn">Show Toast</button>
+        <span class="hint">Shortcuts: M (modal), T (toast)</span>
+      </div>
+    </main>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay hidden" tabindex="-1" aria-hidden="true"></div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button id="modal-close" class="modal-close" aria-label="Close dialog">×</button>
+      <h2 id="modal-title">Welcome!</h2>
+      <p>This modal includes a simple form with validation.</p>
+      <form id="modal-form" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required minlength="2" placeholder="Your name" />
+          <div class="error" id="name-error" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" />
+          <div class="error" id="email-error" aria-live="polite"></div>
+        </div>
+        <div class="actions">
+          <button id="modal-cancel" type="button" class="btn">Cancel</button>
+          <button id="modal-confirm" type="submit" class="btn primary">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Toasts container -->
+    <div id="toast-container" class="toast-container bottom-right" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="script.js" defer></script>
+  </body>
+  </html>
+
+
