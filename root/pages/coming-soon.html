@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Something Extraordinary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #0a0e27;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            /* padding: 50px 20px; */
+        }
+
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            opacity: 0.15;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glowing orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float-orb 20s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #ff0080, transparent);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #40e0d0, transparent);
+            bottom: -250px;
+            right: -250px;
+            animation-delay: 7s;
+        }
+
+        .orb3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #ff8c00, transparent);
+            top: 50%;
+            left: 50%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-100px, 100px) scale(0.9); }
+        }
+
+        /* Particle stars */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .container {
+            text-align: center;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37),
+                        inset 0 0 60px rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            animation: rotate3d 10s infinite linear;
+            box-shadow: 0 10px 40px rgba(255, 0, 128, 0.4);
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            100% { transform: rotateY(360deg) rotateX(360deg); }
+        }
+
+        h1 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            animation: shimmer 3s infinite linear, textFloat 3s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        @keyframes textFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .time-box {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            padding: 35px 30px;
+            border-radius: 25px;
+            min-width: 140px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .time-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .time-box:hover::before {
+            left: 100%;
+        }
+
+        .time-box:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 0, 128, 0.4),
+                        inset 0 0 30px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 0, 128, 0.5);
+        }
+
+        .time-box .number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, #40e0d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(64, 224, 208, 0.5);
+            display: block;
+            line-height: 1;
+        }
+
+        .time-box .label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .cta-section {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .notify-btn {
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #ff0080, #ff8c00);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 0, 128, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notify-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .notify-btn:hover::before {
+            left: 100%;
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 0, 128, 0.6);
+        }
+
+        .social-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .social-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0080, #ff8c00, #40e0d0);
+            border-radius: 10px;
+            animation: progress 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.8);
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .time-box {
+                min-width: 100px;
+                padding: 25px 20px;
+            }
+
+            .time-box .number {
+                font-size: 3rem;
+            }
+
+            .time-box .label {
+                font-size: 0.75rem;
+            }
+
+            .container {
+                padding: 40px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="container">
+        <div class="logo">✨</div>
+        
+        <h1>COMING SOON</h1>
+        <p class="subtitle">Something Extraordinary Awaits</p>
+        <p class="tagline">Prepare to be amazed</p>
+        
+        <div class="countdown">
+            <div class="time-box">
+                <div class="number" id="days">00</div>
+                <div class="label">Days</div>
+            </div>
+            <div class="time-box">
+                <div class="number" id="hours">00</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="time-box">
+                <div class="number" id="minutes">00</div>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="time-box">
+                <div class="number" id="seconds">00</div>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+
+
+        <!-- please change the id's , if you want -->
+        <div class="cta-section">
+            <button class="notify-btn">Notify Me</button>
+            <a href="https://facebook.com/yourpage" target="_blank" class="social-btn" title="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+            </a>
+            <a href="https://twitter.com/yourhandle" target="_blank" class="social-btn" title="Twitter">
+                <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            </a>
+            <a href="https://linkedin.com/company/yourcompany" target="_blank" class="social-btn" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        // Create animated stars
+        function createStars() {
+            const starCount = 100;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Set the launch date (30 days from now)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 10);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Button click handler
+        document.querySelector('.notify-btn').addEventListener('click', function() {
+            this.textContent = '✓ Subscribed!';
+            setTimeout(() => {
+                this.textContent = 'Notify Me';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
